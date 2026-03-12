@@ -16,6 +16,7 @@ win:
       arch: x64
 
 nsis:
+  artifactName: ${productName}.Setup.${version}.${ext}
   oneClick: false
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
@@ -23,6 +24,7 @@ nsis:
   shortcutName: "Deadline Planner"
 
 msi:
+  artifactName: ${productName}.Setup.${version}.${ext}
   oneClick: false
   perMachine: false 
 
