@@ -1,0 +1,39 @@
+appId: com.jewel.deadlineplannerdesktop
+productName: Deadline.Planner
+copyright: 'Copyright Jewel 2026'
+directories:
+  output: dist-packages # installer files go here
+files:
+  - out/**/* # compiled app files
+asarUnpack:
+  - resources/**
+win:
+  icon: resources/icon.png
+  target:
+    - target: nsis 
+      arch: x64
+    - target: msi
+      arch: x64
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: "Deadline Planner"
+
+msi:
+  oneClick: false
+  perMachine: false 
+
+mac:
+  icon: resources/icon.png
+  category: public.app-category.productivity
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+
+dmg:
+  window:
+    width: 540
+    height: 380
