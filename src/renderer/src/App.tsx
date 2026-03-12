@@ -69,7 +69,7 @@ const App: React.FC = () => {
           <h1>Deadline Planner</h1>
           <p>Track your tasks, deadlines, priorities, and notes in one place.</p>
         </div>
-        <div className="version-badge">v1.0.0</div>
+        <div className="version-badge">v1.1.0</div>
       </header>
 
       <StatsGrid tasks={tasks} />
@@ -96,6 +96,9 @@ const App: React.FC = () => {
         onDelete={handleDelete}
         onClearDate={() => setSelectedDate('')}
       />
+      <footer className="app-footer">
+        <p>Deadline Planner · v1.1.0 · Built with Electron + React</p>
+      </footer>
     </div>
   );
 };

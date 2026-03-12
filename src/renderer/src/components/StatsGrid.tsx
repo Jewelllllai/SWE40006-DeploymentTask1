@@ -1,5 +1,6 @@
 import React from 'react';
 import { Task } from './Types';
+import { isPast, isToday, parseISO } from 'date-fns';
 
 interface Props {
   tasks: Task[];
@@ -9,7 +10,7 @@ interface StatItem {
   label: string;
   value: number;
   highlight?: boolean;
-  color: 'blue' | 'yellow' | 'green';
+  color: 'blue' | 'yellow' | 'green' | 'pink';
 }
 
 const StatsGrid: React.FC<Props> = ({ tasks }) => {
@@ -17,6 +18,7 @@ const StatsGrid: React.FC<Props> = ({ tasks }) => {
     { label: 'Total Tasks', value: tasks.length, color: 'blue' },
     { label: 'Pending', value: tasks.filter((t) => !t.completed).length, color: 'yellow' },
     { label: 'Completed', value: tasks.filter((t) => t.completed).length, color: 'green' },
+     { label: 'Overdue', value: tasks.filter((t) => !t.completed && isPast(parseISO(t.deadline)) && !isToday(parseISO(t.deadline))).length, color: 'pink' },
   ];
 
   return (

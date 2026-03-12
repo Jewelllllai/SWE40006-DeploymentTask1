@@ -33,18 +33,10 @@ function createWindow(): void {
   }
 }
 
-// ─── Auto Updater Configuration ───
 function setupAutoUpdater(): void {
-  // Don't auto download — ask user first
   autoUpdater.autoDownload = false
   autoUpdater.autoInstallOnAppQuit = true
 
-  // Check for updates (only runs in production, not dev mode)
-  if (!is.dev) {
-    autoUpdater.checkForUpdates()
-  }
-
-  // Update available — ask user if they want to download
   autoUpdater.on('update-available', () => {
     dialog.showMessageBox({
       type: 'info',
@@ -61,12 +53,18 @@ function setupAutoUpdater(): void {
     })
   })
 
-  // No update found
   autoUpdater.on('update-not-available', () => {
     console.log('App is up to date.')
   })
 
-  // Update downloaded — prompt user to restart
+  autoUpdater.on('download-progress', (progressObj) => {
+    const percent = Math.round(progressObj.percent)
+    const windows = BrowserWindow.getAllWindows()
+    if (windows.length > 0) {
+      windows[0].setTitle(`Downloading update: ${percent}%`)
+    }
+  })
+
   autoUpdater.on('update-downloaded', () => {
     dialog.showMessageBox({
       type: 'info',
@@ -80,10 +78,20 @@ function setupAutoUpdater(): void {
     })
   })
 
-  // Log errors to console
   autoUpdater.on('error', (error) => {
-    console.error('Auto updater error:', error)
+    console.error('AutoUpdater error:', error)
+    dialog.showMessageBox({
+      type: 'error',
+      title: 'Update Error',
+      message: 'An error occurred while updating.',
+      detail: error.message,
+      buttons: ['OK']
+    })
   })
+
+  if (!is.dev) {
+    autoUpdater.checkForUpdates()
+  }
 }
 
 app.whenReady().then(() => {
@@ -96,8 +104,6 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
-
-  // Start auto updater after window is created
   setupAutoUpdater()
 
   app.on('activate', function () {

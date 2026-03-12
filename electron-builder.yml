@@ -37,3 +37,8 @@ dmg:
   window:
     width: 540
     height: 380
+
+publish:
+  provider: github
+  owner: Jewelllllai
+  repo: SWE40006-DeploymentTask1

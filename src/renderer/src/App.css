@@ -554,3 +554,31 @@ button, input, select, textarea { font: inherit; }
   .task-list { grid-template-columns: 1fr; }
   .app-header h1 { font-size: 2rem; }
 }
+
+/* ─── Footer Design (V1.1.0) ─── */
+.app-footer {
+  text-align: center;
+  padding: 16px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  border-top: 1px solid var(--border);
+  letter-spacing: 0.05em;
+}
+
+/* ─── Task Count Badge (V1.1.0) ─── */
+.task-total-badge {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: rgba(78,205,196,0.12);
+  border: 1px solid rgba(78,205,196,0.25);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* ─── Overdue Tasks Card (V1.1.0) ─── */
+.stat-card--pink::before { opacity: 1; background: linear-gradient(90deg, transparent, #f687b3, transparent); }
+.stat-card--pink p { color: #f687b3; }

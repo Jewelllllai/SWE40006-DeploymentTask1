@@ -26,7 +26,7 @@ const TaskList: React.FC<Props> = ({
   return (
     <section className="panel">
       <div className="task-list-header">
-        <h2>Task List</h2>
+        <h2>Task List <span className="task-total-badge">{tasks.length} tasks</span></h2>
         <div className="filters">
           {FILTERS.map((f) => (
             <button
